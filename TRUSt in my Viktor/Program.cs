@@ -709,6 +709,27 @@ namespace Viktor
                 if (circle.Active)
                     Render.Circle.DrawCircle(player.Position, circle.Radius, circle.Color);
             }
+            if (t.IsValidTarget())
+            {
+                var DMG = 0f;
+                if (R.IsReady())
+                {
+                    DMG += R.GetDamage(t);
+                }
+                if (Q.IsReady())
+                {
+                    DMG += Q.GetDamage(t);
+                }
+                if (E.IsReady())
+                {
+                    DMG += E.GetDamage(t);
+                }
+                if (DMG > t.Health)
+                {
+                    Drawing.DrawText(Drawing.Width * 0.1f, Drawing.Height * 0.5f, System.Drawing.Color.Red, "Target Can Be Killed " + t.ChampionName + " has: " + t.Health + "hp");
+                    drawLine(t.Position, Player.Position, 10, System.Drawing.Color.Red);
+                }
+            }
         }
 
         private static void ProcessLink(string key, object value)
